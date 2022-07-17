@@ -3,7 +3,7 @@ import cv2 as cv
 def visual(bboxes, image, scores,labels):
 	k = 0
 	for i in range(scores.size):
-		if(scores[i] > 0):
+		if(scores[i] > 0.8):
 			x1 = int(bboxes[i][0])
 			y1 = int(bboxes[i][1])
 			x2 = int(bboxes[i][2])

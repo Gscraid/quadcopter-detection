@@ -19,7 +19,7 @@ class QuadDetection():
             self.model = torch.load('models/quadro_detector_frcnn_fast.pth')
 
     def quad_detection(self):
-        vid_capture = cv.VideoCapture(0)
+        vid_capture = cv.VideoCapture("123.mkv")
         if self.segmentation:
             while (vid_capture.isOpened()):
                 ret, frame = vid_capture.read()
@@ -58,6 +58,9 @@ class QuadDetection():
                                    output[0]['labels'].detach().numpy())
                     cv.imshow('net', image1)
                     print(bboxes)
+                    key = cv.waitKey(20)
+                    if key == ord('q'):
+                        break
                 else:
                     break
         vid_capture.release()
