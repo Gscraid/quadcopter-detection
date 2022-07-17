@@ -4,7 +4,7 @@ from tensorflow import keras
 import tensorflow as tf
 import numpy as np
 from torchvision import transforms
-
+from visualization import visual
 
 class QuadDetection():
     def __init__(self, segmentation: bool):
@@ -54,6 +54,9 @@ class QuadDetection():
                     image = transforms.ToTensor()(frame).unsqueeze_(0)
                     output = self.model(image)
                     bboxes = output[0]['boxes'].detach().numpy()
+                    image1 = visual(output[0]['boxes'].detach().numpy(), frame, output[0]['scores'].detach().numpy(),
+                                   output[0]['labels'].detach().numpy())
+                    cv.imshow('net', image1)
                     print(bboxes)
                 else:
                     break
